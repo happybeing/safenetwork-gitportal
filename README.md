@@ -44,7 +44,7 @@ So feel free to build your own Safe-git UI tools.
 
 ## How To Discuss
 
-You can open an issue to discuss something specific or join the more general discussion on the Safe Network forum topic: Safe-git Web UI Discussion
+You can open an issue to discuss something specific or join the more general discussion on the Safe Network forum topic: [Safe-git UI Discussion](https://safenetforum.org/t/safe-git-ui-discussion/32793?u=happybeing)
 
 # Contributions
 
