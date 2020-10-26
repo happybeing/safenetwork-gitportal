@@ -51,6 +51,7 @@ I have identified [git-bug](https://github.com/MichaelMure/git-bug) as the most 
 I'm evaluating a solution based on using `git-bug` and `go-git` (both writing in Golang) as libraries compiled to wasm with a web font end to run in a modern web browser.
 
 Here's the overall picture, which may change!
+
 <img src="./diagrams/git-portal-architecture-golang-wasm.png" alt="architecture diagram for golang to wasm proof of concept">
 
 ## Development Tools
