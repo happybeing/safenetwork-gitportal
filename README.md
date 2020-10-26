@@ -48,11 +48,16 @@ I began researching ideas and have reviewed some existing approaches to providin
 I have identified [git-bug](https://github.com/MichaelMure/git-bug) as the most promising way forward, but this is very early stage and there may be other libraries or tools which provide alternative approaches. So I'm interested to hear of other possibilities while I explore using `git-bug`.
 
 ## Architecture for Proof of Concept
-I'm evaluating a solution based on using `git-bug` and `go-git` (both writing in Golang) as libraries compiled to wasm with a web font end to run in a modern web browser.
-
-Here's the overall picture, which may change!
+I'm evaluating a solution based on using `git-bug` and `go-git` (both writing in Golang) as libraries compiled to wasm with a web font end to run in a modern web browser. Here's the overall picture, which may change!
 
 <img src="./diagrams/git-portal-architecture-golang-wasm.png" alt="architecture diagram for golang to wasm proof of concept">
+
+### Drawbacks of The Proof of Concept
+I'm concerned about using Golang/wasm (`git-bug` is written in Golang) for the p2p gitportal. 
+
+The Golang/wasm support is still 'experimental' and so could disappear, and Rust/wasm would be better for a much smaller bundle size and better wasm tooling.
+
+So we should review this and look for options, such as can we have a `git-bug` port (or similar functionality) in Rust.
 
 ## Development Tools
 To create such a complex app in the browser, it seems useful to build on existing libraries not necessarily in JavaScript, and since `git-bug` is written Golang, the intention is to compile to wasm and add a web front end.
