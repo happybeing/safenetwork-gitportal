@@ -1,23 +1,32 @@
 # Decentralised GUI for git on Safe Network
 
-**STATUS:** under discussion - comments and contributions are welcome
+This project aims to provide an independent and potentially 'unhosted' git portal, and ultimately a full featured alternative to github and other third party code repository hosting services.
 
-# Safe-git UI - Vision
-The direction is to provide a github like web UI which runs locally and provides a decenralised github like experience based on Safe Network storage. Safe Network is a secure, anonymous, decentralised storage and applications platform (see [safenetwork.tech](https://safenetwork.tech)).
+Though Safe Network is the focus of development, this project can easily be adapted to work on other peer-to-peer (p2p) storage systems such as IPFS or DAT, or deployed to cloud storage and even static web hosting. 
+
+**STATUS:** building proof of concept - comments and contributions are welcome
+
+# Safe Network Git Portal - Vision
+The essence is a github like web UI which runs locally, so not a federated or server side application, but one which runs in the browser as a static HTML web app.
+
+The aim is to deliver a fully decenralised github like experience based on Safe Network storage, or a similar p2p infrastructure, although as a static HTML app it can be deployed on any storage which can serve HTML to a modern browser.
+
+The benefits of targeting Safe Network are many, but in short it is a secure, anonymous, decentralised storage and communications platform (see [safenetwork.tech](https://safenetwork.tech)).
+
+Here's the diagram that kicked of this project on Sunday 19th October 2020 (after a couple of years thinking). This gives a flavour, but has been superceeded with a proposed solution and architecture, see below.
 
 <img src="./diagrams/past-and-future.png" alt="contrasting git with github and git with Safe architectures">
 
 ## github/gitlab/gitea like GUI
-Possibly a Tauri based Rust backend with web frontend, e.g. using Svelte:
-* operates on a local repo:
-	* spawns git commands
-	* a new `gitex` CLI to create issues, comments etc (e.g. stored in  ``.gitex``)
-	* data for extas held in the repo (e.g. ``issues.json`` and ``issues/issue-001.json``, or perhaps in RDF/turtle)
-* `git push/pull` remotes on Safe (e.g. via FUSE mounted Safe filesyste)
-* cross platform GUI: Windows, MacOS and Linux (e.g. using [Tauri](https://tauri.studio))
-* cross platform terminal UI: Windows, MacOS and Linux (e.g. using [tui-rs](https://github.com/fdehau/tui-rs))
-* web UI for mobile (e.g. static HTML hosted on Safe Network)
-
+* operates on a local git repo
+* includes git functionality
+* adds issues tracking in local and remotes (and later pull requests)
+* `git push/pull` remotes (e.g. on Safe via FUSE mounted Safe filesystem)
+* web UI for public viewing of remotes, and issue creation (as static HTML hosted on Safe)
+* ability for anyone to submit issues and comments via the web UI
+* a native cross platform client for Windows, MacOS and Linux (e.g. using [Tauri](https://tauri.studio))
+* a cross platform terminal UI: Windows, MacOS and Linux (e.g. using [git-bug](https://github.com/MichaelMure/git-bug))
+ 
 # Discussions to Have
 
 ## Existing git UIs
@@ -25,26 +34,29 @@ There are many graphical, web and terminal UIs for `git`, so these may be adapte
 
 Which should we look at and why? If you know any well your input would be very helpful.
 
-## gitex requirements
-`gitex` is a new CLI we need to create that adds features not handled by git, such as github issues.
-
-- `gitex` based features must work in a way which allows a GUI to support them by spawning `git` and `gitex` commands. Doing so enables anyone to operate using the CLI, or to build their own Safe-git UI with the tools of their choice.
-
-- where `gitex` adds something based on a github feature, it should also provide a way to import this from a github repo using the github APIs.
-
-- what features do we want, and what difficulties do they present?
-
-- How to store and publish `gitex` extras?
-  Note that Safe has a built in perpetual history for public data which negates the need for `.gitex` to be under `git`. But then we need a way for third parties to create issues in a way that makes them accessible to everyone interested in a git repository published on Safe.
-
-## Development Tools
-I'm keen to try out Tauri and Svelte at least for proof of concept, but if we define the underlying data storage and structures for `gitex`, anyone will be able to build a GUI with the tools of their choice (e.g. spawning `git` and `gitex` commands).
-
-So feel free to build your own Safe-git UI tools.
-
 ## How To Discuss
 
 You can open an issue to discuss something specific or join the more general discussion on the Safe Network forum topic: [Safe-git UI Discussion](https://safenetforum.org/t/safe-git-ui-discussion/32793?u=happybeing)
+
+## Architectures and Implementation
+I began researching ideas and have reviewed some existing approaches to providing support for issues tracking in `git` including [git-dit](https://github.com/neithernut/git-dit), and [SIT](https://github.com/sit-fyi/sit).
+
+I have identified [git-bug](https://github.com/MichaelMure/git-bug) as the most promising way forward, but this is very early stage and there may be other libraries or tools which provide alternative approaches. So I'm interested to hear of other possibilities while I explore using `git-bug`.
+
+## Architecture for Proof of Concept
+I'm evaluating a solution based on using `git-bug` and `go-git` (both writting in Golang) as libraries compiled to wasm with a web font end to run in a modern web browser.
+
+Here's the overall picture, which may change!
+<img src="./diagrams/git-portal-architecture-golang-wasm.png" alt="architecture diagram for golang to wasm proof of concept">
+
+## Development Tools
+To create such a complex app in the browser, it seems useful to build on existing libraries not necessarily in JavaScript, and since `git-bug` is written Golang, the intention is to compile to wasm and add a web front end.
+
+For the front end, I personally favour Svelte and will use this for things which I build, but it will be possible to use any front end framework or cross platform tooling.
+
+For the cross platform client I'm keen to try out Tauri at least for proof of concept, 
+
+But feel free to build your own git portal tools around this project, using whatever web front end or cross-platform client frameworks you prefer, and if you want to lead that it could become the primary UI for the portal.
 
 # Contributions
 
