@@ -76,4 +76,4 @@ Pull requests to enhance or add to this list are welcome but are accepted on the
 
 # LICENSE
 
-SAFE Network Farming resources herein are licensed under GPLv3 (for details see [./LICENSE](./LICENSE))
+The content of this repository is licensed under GPLv3 (for details see [./LICENSE](./LICENSE)) unless explicitly stated otherwise.
