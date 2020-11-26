@@ -4,7 +4,7 @@ This project aims to provide an independent 'unhosted' git portal, and ultimatel
 
 As far as I know this is the only git portal project which aims to work as a static web application, so an important goal is to show that this is possible, as well as providing a first fully p2p solution to the problem.
 
-**STATUS:** building proof of concept - comments and contributions are welcome
+**STATUS:** building proof of concept ([p2p-git-portal-poc](https://github.com/happybeing/p2p-git-portal-poc)) - comments and contributions are welcome
 
 # Vision - A P2P Git Portal on Safe Network
 The essence is a github like web UI which runs locally, so not a federated or server side application, but one which runs in the browser as a static HTML web app.
@@ -48,7 +48,9 @@ I began researching ideas and have reviewed some existing approaches to providin
 I have identified [git-bug](https://github.com/MichaelMure/git-bug) as the most promising way forward, but this is very early stage and there may be other libraries or tools which provide alternative approaches. So I'm interested to hear of other possibilities while I explore using `git-bug`.
 
 ## Architecture for Proof of Concept
-I'm evaluating a solution based on using `git-bug` and `go-git` (both writing in Golang) as libraries compiled to wasm with a web font end to run in a modern web browser. Here's the overall picture, which may change!
+I'm evaluating a solution based on using `git-bug` and `go-git` (both writing in Golang) as libraries compiled to wasm with a web font end to run in a modern web browser. Follow and contribute at [p2p-git-portal-poc](https://github.com/happybeing/p2p-git-portal-poc).
+
+Here's the overall picture, which may change!
 
 <img src="./diagrams/git-portal-architecture-golang-wasm.png" alt="architecture diagram for golang to wasm proof of concept">
 
