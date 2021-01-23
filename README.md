@@ -4,8 +4,9 @@ This project aims to provide an independent 'unhosted' git portal, and ultimatel
 
 As far as I know this is the only git portal project which aims to work as a static web application, so an important goal is to show that this is possible, as well as providing a first fully p2p solution to the problem.
 
-**STATUS:** building proof of concept ([p2p-git-portal-poc](https://github.com/happybeing/p2p-git-portal-poc)) - comments and contributions are welcome
-
+## STATUS:**
+- [x] Proof of Concept using Svelte + Go/WASM based on git-bug ([p2p-git-portal-poc](https://github.com/happyborg/p2p-git-portal-poc))
+- [ ] ACTIVE: Migrate to Svelte + Rust/WASI on WasmerJS ([p2p-git-portal-wasi](https://github.com/happybeing/p2p-git-portal-wasi)) - contributions welcome
 # Vision - A P2P Git Portal on Safe Network
 The essence is a github like web UI which runs locally, so not a federated or server side application, but one which runs in the browser as a static HTML web app.
 
@@ -54,22 +55,18 @@ Here's the overall picture, which may change!
 
 <img src="./diagrams/git-portal-architecture-golang-wasm.png" alt="architecture diagram for golang to wasm proof of concept">
 
-### Drawbacks of The Proof of Concept
-I'm concerned about using Golang/wasm (`git-bug` is written in Golang) for the p2p gitportal. 
+### Drawbacks of The First Proof of Concept
+The first proof of concept was built using Golang/WASM in order to test the use of `git-bug`. The was very fast to develop, being functional in only a few weeks but using Go was never first choice. Rust would be my first choice for various reasons, but the 12MB runtime for Golang rules it out for a web app. In Rust the overhead is <200K.
 
-The Golang/wasm support is still 'experimental' and so could disappear, and Rust/wasm would be better for a much smaller bundle size and better wasm tooling.
+So work now continues to replicate the functionality of the proof of concept, but using JavaScript and Rust to replace the functions performed by `git-bug`, `go-git` and `go-billy`. 
+## Development Approach
+Svelte has been selected for the front-end because it is very productive, performant and easy to learn. Even if you haven't used Svelte before I think you'll enjoy the experience and find it easy to contribute to front-end work.
 
-So we should review this and look for options, such as can we have a `git-bug` port (or similar functionality) in Rust.
+Where possible business-logic will be compiled to WASM because this produces fast, compact code and allows us to develop in Rust which is productive, reduces scope for bugs and improves security.
 
-## Development Tools
-To create such a complex app in the browser, it seems useful to build on existing libraries not necessarily in JavaScript, and since `git-bug` is written Golang, the intention is to compile to wasm and add a web front end.
+To speed development we use existing libraries as much as possible, leaving the option to re-write or replace them later. For `git` functionality we may use JavaScript implementations in the short term, though will prefer Rust when suitable modules are available. Extensions for git issues, pull requests and additional business logic will be implemented in Rust.
 
-For the front end, I personally favour Svelte and will use this for things which I build, but it will be possible to use any front end framework or cross platform tooling.
-
-For the cross platform client I'm keen to try out Tauri at least for proof of concept, 
-
-But feel free to build your own git portal tools around this project, using whatever web front end or cross-platform client frameworks you prefer, and if you want to lead that it could become the primary UI for the portal.
-
+To develop `git` functionality in a mixture of JavaScript and Rust we require a common filesystem in the browser. For this I evaluated Emscripten and WASI (Web Assembly System Interface) and selected the latter because it is well supported in Rust based on WasmerJS + `wasm-bindgen`. It will also I think be easier and generally more useful when migrating from the browser filesystem to a peer-to-peer filesystem for the production version.
 # Contributions
 
 Pull requests to enhance or add to this list are welcome but are accepted on the condition that they are licensed according to same terms as the LICENSE for software and other resources in this repository.
