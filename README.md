@@ -4,9 +4,9 @@ This project aims to provide an independent 'unhosted' git portal, and ultimatel
 
 As far as I know this is the only git portal project which aims to work as a static web application, so an important goal is to show that this is possible, as well as providing a first fully p2p solution to the problem.
 
-## STATUS:**
-- [x] Proof of Concept using Svelte + Go/WASM based on git-bug ([p2p-git-portal-poc](https://github.com/happyborg/p2p-git-portal-poc))
-- [ ] ACTIVE: Migrate to Svelte + Rust/WASI on WasmerJS ([p2p-git-portal-wasi](https://github.com/happybeing/p2p-git-portal-wasi)) - contributions welcome
+## STATUS:
+- [x] **Proof of Concept** using Svelte + Go/WASM based on git-bug ([p2p-git-portal-poc](https://github.com/happyborg/p2p-git-portal-poc))
+- [ ] **Git Portal Prototype** using Svelte + Rust/WASI on WasmerJS ([p2p-git-portal-wasi](https://github.com/happybeing/p2p-git-portal-wasi)) - contributions welcome
 # Vision - A P2P Git Portal on Safe Network
 The essence is a github like web UI which runs locally, so not a federated or server side application, but one which runs in the browser as a static HTML web app.
 
